@@ -12,9 +12,10 @@ logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
 
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "sqlalchemy"
+app.config["SESSION_PERMANENT"] = True
+app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_SQLALCHEMY"] = db
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
@@ -29,7 +30,7 @@ def provide_index():
 
 @app.route('/login', methods=GET)
 def provide_login():
-    if session and session['name']:
+    if session and 'name' in session and session['name']:
         user_ = session['name']
         if user_.user_type == 1:
             return render_template('admin-dashboard.html') 
@@ -37,5 +38,6 @@ def provide_login():
             return render_template('user-dashboard.html') 
         
     return render_template('login.html')
+
 
 app.register_blueprint(user_blueprint)
