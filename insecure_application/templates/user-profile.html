@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+  
+{% block y %}
+    <!-- Image -->
+    <form action="/user/update-image" method="post">
+        <img src="{{ url_for('static/images', filename=user.user + '.png') }}" alt="No Image" />
+        <input type="file" name={{ user.user }} id={{ user.user }}>
+        <button type="submit"> Change Image </button>
+    </form>
+
+    <form action="/user/update" method="post">
+        <label>Name: </label><input type="text" name="name" id="update-name" value={{ user.name }}><br>
+        <label>Email: </label><input type="text" name="email" id="update-email" value={{ user.email }}><br>
+        <label>UserName: </label><input type="text" name="user" id="update-uname" value={{ user.user }}><br>
+        <button type="submit" id="signup-button">Update Profile</button>
+    </form>
+
+{% endblock %}

@@ -25,7 +25,28 @@ def add_user(body):
     except Exception as e:
         print("in signup...", e)
         return render_template('error.html')
-    
+
+def update_user(body):
+    user = body['user']
+    name = body['name']
+    email = body['email']
+    user_obj = Users(
+            user=user,
+            name=name,
+            email=email
+        )
+
+    try:
+        data_add(user_obj)
+        return render_template('user-profile.html', user=user_obj)
+    except IntegrityError as i:
+        print(i)
+        return render_template('index.html')
+    except Exception as e:
+        print("in profile update...", e)
+        return render_template('error.html')
+
+
 def authenticate(form):
     try:
         user = form['user']
