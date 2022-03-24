@@ -1,4 +1,4 @@
-from flask import session, render_template
+from flask import redirect, session, render_template
 from .model import Users
 from sqlalchemy.exc import IntegrityError
 from utilities.constants import *
@@ -25,6 +25,13 @@ def add_user(body):
     except Exception as e:
         print("in signup...", e)
         return render_template('error.html')
+
+def get_dashboard(user_):
+    user_type = user_.user_type
+    if user_type == 1:
+        return redirect('/admin/')
+    elif user_type == 2:
+        return redirect('/user/')    
     
 def authenticate(form):
     try:
@@ -34,12 +41,9 @@ def authenticate(form):
         user_ = Users.query.filter_by(user=user, pword=pword).first()
         if user_:
             session['name'] = user_
-            user_type = user_.user_type
-            print('user_type:',user_type)
-            if user_type == 1:
-                return render_template('admin-dashboard.html')
-            elif user_type == 2:
-                return render_template('user-dashboard.html')
+            # user_type = user_.user_type
+            # print('user_type:',user_type)
+            return get_dashboard(user_)
         return render_template('login.html', msg='Wrong credentials')
     
     except Exception as e:

@@ -1,17 +1,10 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-    <div id="navbar">
-        <button id="nav-button-home">Home</button>
-        <button id="nav-button-dashboard">Dashboard</button>
-        <button id="nav-button-logout">Logout</button>
+{% extends "layout.html" %}
+  
+{% block y %}
+{% if msg %}<h3> {{ msg }} </h3> {% endif %}
+    <div>
+        <h2> Welcome Admin, {{user_['user']}} </h2>
     </div>
-
     <form action="" method="post">
         <h2>Update User details</h2>
         <input type="email" name="new-email" id="new-email" value="Enter new email">
@@ -35,5 +28,4 @@
         </div>
         
     </div>
-</body>
-</html>
+{% endblock %}

@@ -1,9 +1,14 @@
 from flask import Flask, request, jsonify, make_response, render_template, redirect, session
 import logging
+from utilities.common_functions import check_session_exists
+from users.controller import get_dashboard
 from utilities.constants import GET
 # import jwt
 from users.routes import blueprint as user_blueprint
 from config import db, session_obj
+from blog.routes import blueprint as blog_blueprint
+from admin.routes import blueprint as admin_blueprint
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = '10101010101010'
@@ -30,14 +35,18 @@ def provide_index():
 
 @app.route('/login', methods=GET)
 def provide_login():
-    if session and 'name' in session and session['name']:
+    if check_session_exists():
         user_ = session['name']
-        if user_.user_type == 1:
-            return render_template('admin-dashboard.html') 
-        elif user_.user_type == 2:
-            return render_template('user-dashboard.html') 
+        return get_dashboard(user_)
         
     return render_template('login.html')
 
+@app.route('/logout', methods=GET)
+def logout():
+    session['name'] = None
+    return render_template('login.html', msg='Successfully Logged out...')
+
 
 app.register_blueprint(user_blueprint)
+app.register_blueprint(blog_blueprint)
+app.register_blueprint(admin_blueprint)

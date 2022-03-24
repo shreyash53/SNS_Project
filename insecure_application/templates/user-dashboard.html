@@ -1,54 +1,31 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-    <div id="navbar">
-        <button id="nav-button-home">Home</button>
-        <button id="nav-button-dashboard">Dashboard</button>
-        <button id="nav-button-logout">Logout</button>
-    </div>
+{% extends "layout.html" %}
+  
+{% block y %}
+{% if msg %}<h3> {{ msg }} </h3> {% endif %}
+<div>
+    <h2> Welcome User, {{user_['user']}} </h2>
+</div>
+<div>
+    <h1> Add New Blog </h1>
+    <form action='/blog/add' method='POST'>
+        <label>Blog Title: </label><input type="text" name="blog_title"></br>
+        <label>Blog Content: </label><textarea type="text" name="blog_content"></textarea></br>
 
-    
-    <form action="" method="post">
-        <h2>Update User details</h2>
-        <input type="email" name="new-email" id="new-email" value="Enter new email">
-        <button type="submit">Change</button>
-        <br><br>
-        <input type="text" name="old-password" id="old-password" value="Enter old password">
-        <br>
-        <input type="text" name="new-password" id="new-password" value="Enter new password">
-        <button type="submit">Change</button>
-        <br>
+        <button type="submit">Submit</button>
     </form>
-    <div>
-        {% for blog in blogs %}
-            <div>
-                <h2>{{ blog["title"] }}</h2>
-                <textarea id="blog-{{ blog['id'] }}" cols="30" rows="10">{{ blog["text"] }}</textarea>
-                <button id="save-changes-blog-{{ blog['id'] }}">Save</button>
-            </div>
-        {% endfor %}
-        
-        <div id="div-blogs">
-            <h2>Blog 1 Name</h2>
-            <textarea name="blog-1" id="blog-1" cols="30" rows="10">Hello everyone
-            </textarea>
-            <button id="save-changes-blog-1">Save</button>
-        </div>
-        
+</div>
+
+<div>
+    {% if blogs %}<h1> All Blogs: </h1> {% endif %}
+    {% for blog in blogs %}
         <div>
-            <h2>Blog 2 Name</h2>
-            <textarea name="blog-1" id="blog-1" cols="30" rows="10">Hello everyone
-            </textarea>
-            <button id="save-changes-blog-1">Save</button>
+            <fieldset>
+                <legend><h2>{{ blog["blog_title"] }}</h2></legend>
+                <div id="blog-{{ blog['blog_id'] }}">{{ blog["blog_content"] | safe}}</textarea>
+                <!--<button id="save-changes-blog-{{ blog['blog_id'] }}">Save</button>-->
+            </fieldset>
         </div>
-        
-    </div>
+    {% endfor %}
     
-    </script>
-</body>
-</html>
+</div>
+{% endblock %}
