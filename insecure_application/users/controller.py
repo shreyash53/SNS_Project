@@ -8,15 +8,17 @@ def add_user(body):
     user = body['user']
     pword = body['pword']
     name = body['name']
+    email = body['email']
     user_obj = Users(
             user=user,
             pword=pword,
-            name=name
+            name=name,
+            email=email
         )
 
     try:
         data_add(user_obj)
-        return
+        return render_template('login.html', msg='You have been successfully signed up')
     except IntegrityError as i:
         print(i)
         return render_template('index.html')
@@ -26,9 +28,9 @@ def add_user(body):
     
 def authenticate(form):
     try:
-        user = form['pword']
+        user = form['user']
         pword = form['pword']
-        
+        print(user, pword)
         user_ = Users.query.filter_by(user=user, pword=pword).first()
         if user_:
             session['name'] = user_
@@ -38,7 +40,7 @@ def authenticate(form):
                 return render_template('admin-dashboard.html')
             elif user_type == 2:
                 return render_template('user-dashboard.html')
-        return render_template('login.html')
+        return render_template('login.html', msg='Wrong credentials')
     
     except Exception as e:
         print("in authenticate...\n", e)
