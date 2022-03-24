@@ -24,16 +24,16 @@
         <button type="submit">Change</button>
         <br>
     </form>
-    {% for blog in blogs %}
-        <div>
-            <h2>{{ blog["title"] }}</h2>
-            <textarea id="blog-{{blog['id']}}" cols="30" rows="10">{{blog["text"]}}</textarea>
-            <button id="save-changes-blog-{{blog['id']}}">Save</button>
-        </div>
+    <div>
+        {% for blog in blogs %}
+            <div>
+                <h2>{{ blog["title"] }}</h2>
+                <textarea id="blog-{{ blog['id'] }}" cols="30" rows="10">{{ blog["text"] }}</textarea>
+                <button id="save-changes-blog-{{ blog['id'] }}">Save</button>
+            </div>
+        {% endfor %}
         
-    {% endfor %}
-    <div id="div-blogs">
-        <div>
+        <div id="div-blogs">
             <h2>Blog 1 Name</h2>
             <textarea name="blog-1" id="blog-1" cols="30" rows="10">Hello everyone
             </textarea>
