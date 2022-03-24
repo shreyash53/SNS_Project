@@ -8,7 +8,7 @@ def get_picture():
     user = body['user']
     print(body)
     try:
-        path = os.path.join("../pictures", user + ".png")
+        path = os.path.join("../pictures", user)
         print(path)
         return send_file(path)
     except Exception as e:
