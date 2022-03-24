@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+  
+<html lang="en">
+    <head>
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title> flask </title>
+    </head>
+    <body>
+        <div id="navbar">
+            <button id="nav-button-home"><a href='/'>Home</a></button>
+            <button id="nav-button-dashboard"><a href='/login'> Login</a></button>
+            <button id="nav-button-logout">Logout</button>
+        </div>
+        {% block y %}{% endblock %}
+    </body>
+</html>
