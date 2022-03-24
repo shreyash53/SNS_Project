@@ -1,13 +1,12 @@
 
 from flask import render_template, request, session, Blueprint
-from app import app
 from utilities.constants import *
 from .controller import authenticate
 
 blueprint = Blueprint("User", __name__, url_prefix="/user")
 
 
-@app.route('/signup', methods = POST)
+@blueprint.route('/signup', methods = POST)
 def signup():
     try:
         body = request.form
@@ -22,7 +21,7 @@ def signup():
         return {"message":"There was an issue adding the user"}
     
     
-@app.route('/login', methods = POST)
+@blueprint.route('/login', methods = POST)
 def login():
     form = request.form
     user = form['user']
