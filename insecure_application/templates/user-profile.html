@@ -3,7 +3,7 @@
 {% block y %}
     <!-- Image -->
     <form action="/user/update-image" method="post" enctype="multipart/form-data">
-        <img src="{{ 'static/images/' + user.user}}" alt="No Image" width="20%"/>
+        <!-- <img src="{{ 'static/images/' + user.user}}" alt="No Image" width="20%"/> -->
         <img alt="No Image" id="profile-picture" width="20%">
         <input type="file" name={{ user.user }} id={{ user.user }}>
         <button type="submit"> Change Image </button>
@@ -18,7 +18,7 @@
 
     <script>
         async function get_profile_picture(user){
-            data = {"picture_name": "{{user.user}}"}
+            data = {"picture_name": user}
             console.log(data)
             url = "http://127.0.0.1:5000/profile_picture"
             const response = await fetch(url, {
@@ -35,7 +35,7 @@
             console.log(img_arr)
         }
 
-        get_profile_picture("{{ user.user }}")
+        // get_profile_picture("{{ user.user }}")
     </script>
 
 {% endblock %}

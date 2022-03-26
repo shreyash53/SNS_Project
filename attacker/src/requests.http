@@ -1,8 +1,17 @@
-GET http://127.0.0.1:5000/get_picture
+GET http://127.0.0.1:5000/profile_picture
 Content-Type: application/json
 
 {
-    "user": "user001.png"
+    "picture_name": "user001.png"
+}
+
+###
+
+GET http://127.0.0.1:5000/profile_picture
+Content-Type: application/json
+
+{
+    "picture_name": "../pictures/test.txt"
 }
 
 ###
@@ -11,16 +20,7 @@ GET http://127.0.0.1:5000/get_picture
 Content-Type: application/json
 
 {
-    "user": "../pictures/test.txt"
-}
-
-###
-
-GET http://127.0.0.1:5000/get_picture
-Content-Type: application/json
-
-{
-    "user": "../src/*.*"
+    "picture_name": "../src/*.*"
 }
 
 ###

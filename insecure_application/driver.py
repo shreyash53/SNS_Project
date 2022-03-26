@@ -11,6 +11,7 @@ import logging
 import os
 from blog.routes import blueprint as blog_blueprint
 from admin.routes import blueprint as admin_blueprint
+from users import model as user_model
 
 app = Flask(__name__)
 
@@ -47,8 +48,9 @@ def provide_login():
 @app.route('/user-profile', methods=GET)
 def provide_profile():
     if session and 'name' in session and session['name']:
-        user_ = session['name']
-        print(user_.user)
+        # user_ = session['name']
+        user_ = db.session.query(user_model.Users).get(session['name'].user_id)
+        # print(user_.user)
         return render_template('user-profile.html', user=user_) 
         
     return render_template('login.html')

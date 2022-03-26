@@ -9,7 +9,7 @@ def get_response_code(url, target):
     
 def gen_str(crr, limit=13):
     if crr != "":
-        # resp_code = get_response_code("http://localhost:8000/", crr)
+        resp_code = get_response_code("http://localhost:8000/", crr)
         resp_code = 200
         if resp_code in range(200, 300):
             print(crr, resp_code)
@@ -22,4 +22,16 @@ def gen_str(crr, limit=13):
     
 
 if __name__ == "__main__":
-    gen_str("", 10)
+    # gen_str("", 10)
+    with open("api_list.txt") as file:
+        while True:
+            line = file.readline().strip()
+            if not line: break
+            # print(line)
+            resp = get_response_code("http://127.0.0.1:5000", line)
+            # print(resp)
+            if(resp != 404):
+                print(line, resp)
+
+
+ 

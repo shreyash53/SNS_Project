@@ -19,3 +19,5 @@ class Users(db.Model):
             "email" : self.email,
             "user_type" : self.user_type
         }
+
+    
