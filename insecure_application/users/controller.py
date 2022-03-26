@@ -3,6 +3,7 @@ from .model import Users
 from sqlalchemy.exc import IntegrityError
 from utilities.constants import *
 from utilities.database_queries import data_add
+from config import db
 
 def add_user(body):
     user = body['user']
@@ -25,6 +26,32 @@ def add_user(body):
     except Exception as e:
         print("in signup...", e)
         return render_template('error.html')
+
+def update_user(body):
+    user = body['user']
+    name = body['name']
+    email = body['email']
+    
+
+    try:
+        # data_add(user_obj)
+        user_ = db.session.query(Users).get(session['name'].user_id)
+        print(user_.get())
+        for key, value in body.items():
+            setattr(user_, key, value)
+
+        db.session.commit()
+        db.session.flush()
+        print(user_.get())
+        print('here')
+        return render_template('user-profile.html', user=user_)
+    except IntegrityError as i:
+        print(i)
+        return render_template('index.html')
+    except Exception as e:
+        print("in profile update...", e)
+        return render_template('error.html')
+
 
 def get_dashboard(user_):
     user_type = user_.user_type

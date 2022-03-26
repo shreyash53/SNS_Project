@@ -1,0 +1,4 @@
+/admin 200
+/admin/ 200
+/login 200
+/user/login 405
