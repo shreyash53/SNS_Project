@@ -1,8 +1,8 @@
-from flask import Flask, request, jsonify, make_response, render_template, redirect, session
+from flask import Flask, request, jsonify, make_response, render_template, redirect, session, send_file
 import logging
 from utilities.common_functions import check_session_exists
 from users.controller import get_dashboard
-from utilities.constants import GET
+from utilities.constants import GET, POST
 # import jwt
 from users.routes import blueprint as user_blueprint
 from utilities.constants import GET
@@ -48,14 +48,15 @@ def provide_login():
 def provide_profile():
     if session and 'name' in session and session['name']:
         user_ = session['name']
+        print(user_.user)
         return render_template('user-profile.html', user=user_) 
         
     return render_template('login.html')
 
-@app.route('/profile_picture', methods=GET)
-def provide_profile():
-    if session and 'name' in session and session['name']:
-        user_ = session['name']
+@app.route('/profile_picture', methods=POST)
+def provide_profile_picture():
+    if True:# or session and 'name' in session and session['name']:
+        # user_ = session['name']
         body = request.get_json()
         path = os.path.join('static/images', body["picture_name"])
         return send_file(path)

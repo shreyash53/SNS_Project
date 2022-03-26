@@ -2,8 +2,9 @@
 from flask import redirect, render_template, request, session, Blueprint
 from utilities.common_functions import check_session_exists
 from utilities.constants import *
-from .controller import authenticate, add_user
+from .controller import authenticate, add_user, update_user
 from blog.controller import get_all_blogs
+import os
 
 blueprint = Blueprint("User", __name__, url_prefix="/user")
 
@@ -33,6 +34,19 @@ def update_user_profile():
     if session and 'name' in session and session['name']:
         body = request.form
         return update_user(body)
+        
+        
+    return render_template('login.html')
+
+@blueprint.route('/update-image', methods=POST)
+def update_user_image():
+    if session and 'name' in session and session['name']:
+        user = session["name"].user
+        file = request.files[user]
+        print(os.getcwd())
+        with open(os.path.join("static/images", user), "wb+") as f:
+            file.save(f)
+        return "1234"
         
         
     return render_template('login.html')
