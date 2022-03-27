@@ -81,7 +81,7 @@ def authenticate(form):
         
 def forgot_password(form):
     uname = form['user']
-    user_ = Users.query.filter(user=uname).first()
+    user_ = Users.query.filter_by(user=uname).first()
     if user_:
         email_service(user_.email, 'Reset your Password', user_.user_id)
     return redirect('/login')
