@@ -85,8 +85,9 @@ def forgot_password(form):
         email_service(user_.email, 'Reset your Password', user_.user_id)
     return redirect('/login')
 
-def reset_password(form, user_id):
+def reset_password(form):
     pword = form['pword']
+    user_id = int(form['user_id'])
     user_ = Users.query.get(user_id)
     if(user_):
         user_.pword = pword
