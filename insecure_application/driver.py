@@ -97,6 +97,10 @@ def provide_profile_picture():
         
     return render_template('login.html')
 
+@app.route('/reset-password/<user_id>', methods=GET)
+def reset_password(user_id):
+    return render_template('reset-password.html', user_id=user_id)
+
 @app.route('/logout', methods=GET)
 def logout():
     session['name'] = None

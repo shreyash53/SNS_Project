@@ -34,10 +34,10 @@ def forgot_pass():
     form = request.form
     return forgot_password(form)
 
-@blueprint.route('/reset-password/<user_id>', methods=POST)
-def reset_pass(user_id):
+@blueprint.route('/reset-password', methods=POST)
+def reset_pass():
     form = request.form
-    return reset_password(form, user_id)
+    return reset_password(form)
 
 @blueprint.route('/update', methods=POST)
 def update_user_profile():
