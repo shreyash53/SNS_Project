@@ -1,4 +1,6 @@
 from flask import redirect, session, render_template
+
+from utilities.common_functions import email_service
 from .model import Users
 from sqlalchemy.exc import IntegrityError
 from utilities.constants import *
@@ -53,7 +55,6 @@ def update_user(body):
         print("in profile update...", e)
         return render_template('error.html')
 
-
 def get_dashboard(user_):
     user_type = user_.user_type
     if user_type == 1:
@@ -77,3 +78,18 @@ def authenticate(form):
     except Exception as e:
         print("in authenticate...\n", e)
         return 0
+        
+def forgot_password(form):
+    uname = form['user']
+    user_ = Users.query.filter(user=uname).first()
+    if user_:
+        email_service(user_.email, 'Reset your Password', user_.user_id)
+    return redirect('/login')
+
+def reset_password(form, user_id):
+    pword = form['pword']
+    user_ = Users.query.get(user_id)
+    if(user_):
+        user_.pword = pword
+        db.session.commit()
+    return redirect('/login')

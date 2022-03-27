@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify, make_response, render_template, redirect
-# import jwt
+from flask_sqlalchemy import SQLAlchemy
+from  werkzeug.security import generate_password_hash, check_password_hash
+import jwt
+from datetime import datetime, timedelta
 
 
 app = Flask(__name__)
@@ -7,10 +10,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 
 app.config['SECRET_KEY'] = '123459'
+db = SQLAlchemy(app)
 import logging
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
 
+class database(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    user_name = db.Column(db.String(200))
+    password = db.Column(db.String(200))
 
 @app.route('/signup', methods = ['POST'])
 def signup():
@@ -43,4 +51,5 @@ def verify():
     return {"err":"Invalid User name or Password"}
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(debug=True)

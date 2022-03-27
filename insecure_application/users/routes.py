@@ -2,7 +2,7 @@
 from flask import redirect, render_template, request, session, Blueprint
 from utilities.common_functions import check_session_exists
 from utilities.constants import *
-from .controller import authenticate, add_user, update_user
+from .controller import authenticate, add_user, update_user, forgot_password, reset_password
 from blog.controller import get_all_blogs
 import os
 
@@ -28,10 +28,20 @@ def login():
     form = request.form
     return authenticate(form)
     
+    
+@blueprint.route('/forgot-password', methods=POST)
+def forgot_pass():
+    form = request.form
+    return forgot_password(form)
+
+@blueprint.route('/reset-password/<user_id>', methods=POST)
+def reset_pass(user_id):
+    form = request.form
+    return reset_password(form, user_id)
 
 @blueprint.route('/update', methods=POST)
 def update_user_profile():
-    if session and 'name' in session and session['name']:
+    if check_session_exists():
         body = request.form
         # print("LOG:", body['email'])
         return update_user(body)
@@ -41,7 +51,7 @@ def update_user_profile():
 
 @blueprint.route('/update-image', methods=POST)
 def update_user_image():
-    if session and 'name' in session and session['name']:
+    if check_session_exists():
         user = session["name"].user
         file = request.files[user]
         # print()
