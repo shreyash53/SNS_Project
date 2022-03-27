@@ -1,16 +1,18 @@
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, render_template
 import os
+import markdown
+
 app = Flask(__name__)
 
-@app.route('/get_picture', methods =['GET'])
+with open("./templates/readme.md", "r") as f:
+    mdtext = f.read()
+
+mdhtml = markdown.markdown(mdtext, extensions=['md_in_html'])
+
+@app.route('/', methods =['GET'])
 def get_picture():
-    body = request.get_json()
-    user = body['user']
-    print(body)
     try:
-        path = os.path.join("../pictures", user)
-        print(path)
-        return send_file(path)
+        return mdhtml
     except Exception as e:
         print(e)
         return e
