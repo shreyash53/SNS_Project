@@ -44,7 +44,8 @@ def update_user(body):
         db.session.flush()
         print(user_.get())
         print('here')
-        return render_template('user-profile.html', user=user_)
+        return {"message":"Password updates successfully"}
+        # return render_template('user-profile.html', user=user_)
     except IntegrityError as i:
         print(i)
         return render_template('index.html')

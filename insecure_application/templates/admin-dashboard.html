@@ -5,11 +5,14 @@
     <div>
         <h2> Welcome Admin, {{user_['user']}} </h2>
     </div>
-    <form action="" method="post">
+    <form action="/user/update" method="post">
         <h2>Update User details</h2>
-        <input type="email" name="new-email" id="new-email" value="Enter new email">
+        <input type="email" name="email" id="new-email" value="Enter new email">
         <button type="submit">Change</button>
-        <br><br>
+        <br>
+    </form>
+    <form action="/user/update-password" method="post">
+        <h2>Update Password</h2>
         <input type="text" name="old-password" id="old-password" value="Enter old password">
         <br>
         <input type="text" name="new-password" id="new-password" value="Enter new password">

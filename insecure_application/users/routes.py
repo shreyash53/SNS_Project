@@ -33,7 +33,7 @@ def login():
 def update_user_profile():
     if session and 'name' in session and session['name']:
         body = request.form
-        print("LOG:", body['email'])
+        # print("LOG:", body['email'])
         return update_user(body)
         
         
