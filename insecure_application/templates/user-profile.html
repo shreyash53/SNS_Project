@@ -4,18 +4,28 @@
     <!-- Image -->
     <form action="/user/update-image" method="post" enctype="multipart/form-data">
         <!-- <img src="{{ 'static/images/' + user.user}}" alt="No Image" width="20%"/> -->
+        <h2>Update Profile Picture</h2>
         <img alt="No Image" id="profile-picture" width="20%">
         <input type="file" name={{ user.user }} id={{ user.user }}>
         <button type="submit"> Change Image </button>
     </form>
 
     <form action="/user/update" method="post">
+        <h2>Update User-Name, Name and Email</h2>
         <label>Name: </label><input type="text" name="name" id="update-name" value={{ user.name }}><br>
         <label>Email: </label><input type="text" name="email" id="update-email" value={{ user.email }}><br>
         <label>UserName: </label><input type="text" name="user" id="update-uname" value={{ user.user }}><br>
         <button type="submit" id="signup-button">Update Profile</button>
     </form>
 
+    <form action="/user/update-password" method="post">
+        <h2>Update Password</h2>
+        <input type="text" name="old-password" id="old-password" value="Enter old password">
+        <br>
+        <input type="text" name="new-password" id="new-password" value="Enter new password">
+        <button type="submit">Change</button>
+        <br>
+    </form>
     <script>
         async function get_profile_picture(user){
             data = {"picture_name": user}
@@ -35,7 +45,7 @@
             console.log(img_arr)
         }
 
-        // get_profile_picture("{{ user.user }}")
+        get_profile_picture("{{ user.user }}")
     </script>
 
 {% endblock %}
