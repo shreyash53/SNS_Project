@@ -43,7 +43,7 @@ def reset_pass():
 def update_user_profile():
     if check_session_exists():
         body = request.form
-        print("LOG:", body['email'])
+        # print("LOG:", body['email'])
         return update_user(body)
         
         

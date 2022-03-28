@@ -1,18 +1,22 @@
+from crypt import methods
 from flask import Flask, request, jsonify, make_response, render_template, redirect, session, send_file
 import logging
-from insecure_application.utilities.constants import SENDER_EMAIL
+from utilities.constants import SENDER_EMAIL
 from utilities.common_functions import check_session_exists
 from users.controller import get_dashboard
 from utilities.constants import GET, POST
 # import jwt
 from users.routes import blueprint as user_blueprint
 from utilities.constants import GET
+from config import db, session_obj, GMAIL_PASSWORD, GMAIL_ID
 from config import db, session_obj, mail
 import logging
 import os
 from blog.routes import blueprint as blog_blueprint
 from admin.routes import blueprint as admin_blueprint
 from users import model as user_model
+
+# from flask_mail import Mail,  Message
 
 app = Flask(__name__)
 
@@ -27,14 +31,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config["SESSION_SQLALCHEMY"] = db
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# app.config['MAIL_SERVER']='smtp.gmail.com'
-# app.config['MAIL_PORT'] = 465
-# app.config['MAIL_USERNAME'] = SENDER_EMAIL
-# app.config['MAIL_PASSWORD'] = SENDER_PASSWORD
-# app.config['MAIL_USE_TLS'] = False
-# app.config['MAIL_USE_SSL'] = True
 
-mail.init_app(app)
 
 db.init_app(app)
 
@@ -42,6 +39,27 @@ session_obj.init_app(app)
 
 with app.app_context():
     db.create_all()
+
+app.config.update(
+    MAIL_SERVER = 'smtp.gmail.com',
+    MAIL_PORT = 465,
+    MAIL_USE_SSL = True,
+    MAIL_USERNAME = GMAIL_ID,
+    MAIL_PASSWORD = GMAIL_PASSWORD
+)
+
+mail.init_app(app)
+# mail = Mail(app)
+
+# @app.route('/send-mail/', methods=GET)
+# def send_mail():
+#     msg = mail.send_message(
+#         'Password Recovery',
+#         sender='sartthakrawatt@gmail.com',
+#         recipients=['srtkrwt@gmail.com'],
+#         body="Click on the link to change the password..."
+#     )
+#     return 'Mail sent'
 
 @app.route('/', methods=GET)
 def provide_index():
@@ -61,7 +79,11 @@ def provide_profile():
         # user_ = session['name']
         user_ = db.session.query(user_model.Users).get(session['name'].user_id)
         # print(user_.user)
-        return render_template('user-profile.html', user=user_) 
+        user_type = user_.user_type
+        if user_type == 1:
+            return redirect('/admin/')
+        elif user_type == 2:
+            return render_template('user-profile.html', user=user_) 
         
     return render_template('login.html')
 

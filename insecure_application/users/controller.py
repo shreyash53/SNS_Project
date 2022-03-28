@@ -46,7 +46,8 @@ def update_user(body):
         db.session.flush()
         print(user_.get())
         print('here')
-        return render_template('user-profile.html', user=user_)
+        return {"message":"Password updates successfully"}
+        # return render_template('user-profile.html', user=user_)
     except IntegrityError as i:
         print(i)
         return render_template('index.html')
@@ -80,7 +81,7 @@ def authenticate(form):
         
 def forgot_password(form):
     uname = form['user']
-    user_ = Users.query.filter(user=uname).first()
+    user_ = Users.query.filter_by(user=uname).first()
     if user_:
         email_service(user_.email, 'Reset your Password', user_.user_id)
     return redirect('/login')
