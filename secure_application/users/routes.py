@@ -5,8 +5,6 @@ from utilities.constants import *
 from .controller import authenticate, add_user, update_user, forgot_password, reset_password
 from blog.controller import get_all_blogs
 import os
-import markdown
-from markupsafe import Markup
 
 
 blueprint = Blueprint("User", __name__, url_prefix="/user")
@@ -14,17 +12,9 @@ blueprint = Blueprint("User", __name__, url_prefix="/user")
 @blueprint.route('/', methods=GET)
 def get_user_dashboard():
     if check_session_exists():
-        blogs = get_all_blogs()
-        # print("hrlloo", blogs[0].blog_title)
-        html_blogs = []
-        for blog in blogs:
-            # mdhtml = markdown.markdown(blog.blog_content, extensions=['md_in_html'])
-            # mdhtml = "<code>" + mdhtml + "</code>"
-            mdhtml = Markup(blog.blog_content)
-            html_blogs.append({"blog_title": blog.blog_title, "blog_content": mdhtml})
-            
+        blogs = get_all_blogs()           
         user_ = session['name']
-        return render_template('user-dashboard.html', blogs=html_blogs, user_ = user_.get())
+        return render_template('user-dashboard.html', blogs=blogs, user_ = user_.get())
     return redirect('login.html')
 
 @blueprint.route('/signup', methods = POST)

@@ -21,7 +21,7 @@
         <div>
             <fieldset><code>
                 <legend><h2>{{ blog["blog_title"] }}</h2></legend>
-                <div id="blog-{{ blog['blog_id'] }}">{{ blog["blog_content"]}}</div>
+                <div id="blog-{{ blog['blog_id'] }}">{{ blog["blog_content"] | safe}}</div>
                 <!--<button id="save-changes-blog-{{ blog['blog_id'] }}">Save</button>-->
                 </code>
             </fieldset>

@@ -7,3 +7,5 @@ HTTP_BAD_REQUEST = 400
 HTTP_PAGE_NOT_FOUND = 404
 SENDER_EMAIL = 'sartthakrawatt@gmail.com'
 SENDER_PASSWORD = 'space bar'
+COMMON_TAGS = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'strong', 'ul', 
+               'table', 'tr', 'td', 'th', 'span']
