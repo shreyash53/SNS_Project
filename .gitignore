@@ -1,3 +1,4 @@
 env
 __pycache__
 flask_session
+insecure_application/database.db
