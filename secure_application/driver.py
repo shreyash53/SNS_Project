@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, request, jsonify, make_response, render_template, redirect, session, send_file
 import logging
 from utilities.constants import SENDER_EMAIL
