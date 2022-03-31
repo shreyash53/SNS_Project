@@ -14,7 +14,7 @@
 
 # Insecure Application
 
-## 1 Broken access control and priviledge escalation due to improper authorization:
+## 1. Broken access control and priviledge escalation due to improper authorization:
 1. Attacker finds the admin login page using bruteforce.
 Attacker has a list of popular API endpoints.<br>
 ```
@@ -28,7 +28,8 @@ python3 bruteforce-url.py
 2. Attacker logs in as a normal user and then tries to access admin page. Due to improper authorization, attacker is granted access.
 
 
-## 2 Session Hijacking 
+## 2. Gain Access Hijacking 
+An attacker can go through all the APIs used by the Blogging application and try to find vulnerabilities. Here, they will find an API which is used 
 
 Creating a hidden form that exploits the API that updates the user profile. Attacker places the form in the blog's content; whenever a user clicks on the button, its email is changed. Later attacker can use the forgot password feature to change the password.
 
@@ -46,7 +47,7 @@ Attacker can inspect the update-profile page to learn the working of the API cal
 </form>
 ```
 
-## 3 Sensitive data access
+## 3. Sensitive data access
 All the profile pictures are stored on the server. The webpage sends a POST request to fetch the picture. The attacker exploits this. He can send mallicious file name in the request, like "../../../../../../../ect/passwd" or "../../config.py" 
 
 Attacker can inspect the update-profile page to learn the working of the API call that fetches the profile picture; then send requests containing malicious filename.
@@ -82,7 +83,7 @@ Content-Type: application/json
 }
 ```
 
-## 4 Denial Of Service attack
+## 4. Denial Of Service attack
 Attacker can DOS the server, this makes the services unavailable the the normal users.
 We used Torshammer to perform the DOS attack.<br>
 `python2 torshammer.py -t 127.0.0.1 -p 5000` 
