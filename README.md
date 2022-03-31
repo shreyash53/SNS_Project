@@ -1,2 +1,3 @@
 # SNS_Project
-<script> alert("helloooooo") </script>
+### There is a secure and insecure application 
+### Find Readme inside each for more info.
