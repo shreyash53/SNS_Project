@@ -16,13 +16,16 @@
 
 ## 1 Broken access control and priviledge escalation due to improper authorization:
 1. Attacker finds the admin login page using bruteforce.
-Attacker has a list of popular API endpoints.
+Attacker has a list of popular API endpoints.<br>
+`python3 bruteforce-url.py`
+
 2. Attacker logs in as a normal user and tries to access admin page. Due to improper authorization, attacker is granted access.
 
 
 ## 2 Session Hijacking 
 Creating a hidden form that exploits the API that updates the user profile. Attacker places the form in the blog's content; whenever a user clicks on the button, its email is changed. Later attacker can use the forgot password feature to change the password.
 
+Attacker can inspect the update-profile page to learn the working of the API call; then create a fake HTML form with attackers details.
 ```
 <style>
     .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
@@ -39,7 +42,7 @@ Creating a hidden form that exploits the API that updates the user profile. Atta
 ## 3 Sensitive data access
 All the profile pictures are stored on the server. The webpage sends a POST request to fetch the picture. The attacker exploits this. He can send mallicious file name in the request, like "../../../../../../../ect/passwd" or "../../config.py" 
 
-
+Attacker can inspect the update-profile page to learn the working of the API call that fetches the profile picture; then send requests containing malicious filename.
 
 ```
 This will return  profile picture of user="user001"
