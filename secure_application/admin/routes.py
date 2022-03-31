@@ -11,4 +11,4 @@ blueprint = Blueprint('admin', __name__, url_prefix='/admin')
 def get_admin_dashboard():
     if check_session_exists() and session["name"].user_type == ADMIN_USER_TYPE:
         return render_template('admin-dashboard.html', user_ = session['name'].get())
-    return redirect('/login')
+    return render_template('error.html')

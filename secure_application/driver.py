@@ -88,18 +88,17 @@ def provide_profile():
 
 @app.route('/profile_picture', methods=POST)
 def provide_profile_picture():
-    if session and 'name' in session and session['name']:
+    # if session and 'name' in session and session['name']:
         # user_ = session['name']
-        body = request.get_json()
-        picture_name = body["picture_name"]
+    body = request.get_json()
+    picture_name = body["picture_name"]
 
-        if check_user(picture_name):
-            path = os.path.join('static/images', picture_name)
-            return send_file(path)
-        else:
-            return {"error": "Invalid Username"}
+    if check_user(picture_name):
+        path = os.path.join('static/images', picture_name)
+        return send_file(path)
+    else:
+        return render_template('error.html')
         
-    return render_template('login.html')
 
 @app.route('/reset-password/<user_id>', methods=GET)
 def reset_password(user_id):
