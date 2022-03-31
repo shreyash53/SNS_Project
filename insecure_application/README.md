@@ -17,9 +17,15 @@
 ## 1 Broken access control and priviledge escalation due to improper authorization:
 1. Attacker finds the admin login page using bruteforce.
 Attacker has a list of popular API endpoints.<br>
-`python3 bruteforce-url.py`
+```
+python3 bruteforce-url.py
+/admin 200
+/admin/ 200
+/login 200
+/user/login 405
+```
 
-2. Attacker logs in as a normal user and tries to access admin page. Due to improper authorization, attacker is granted access.
+2. Attacker logs in as a normal user and then tries to access admin page. Due to improper authorization, attacker is granted access.
 
 
 ## 2 Session Hijacking 
