@@ -1,3 +1,17 @@
+# Setup
+- For Linux.
+- Download Python 3.6+ version and install.
+- Go inside the project directory and open in terminal.
+- Follow steps to create a virtual environment in your system (optional) 
+    - Run command `pip install virtualenv` to install virtual package manager
+    - Make a virtual environment using command `virtualenv env`
+    - Now activate your virtual environment: `source env/bin/activate`
+    
+- Install all project dependencies: `pip install -r requirements.txt` or `pip3 install -r requirements.txt`
+- Finally, run application: `python app.py` or  `python3 app.py`
+
+<br>
+
 # Insecure Application
 
 ## 1 Broken access control and priviledge escalation due to improper authorization:
