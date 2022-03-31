@@ -29,6 +29,7 @@ python3 bruteforce-url.py
 
 
 ## 2 Session Hijacking 
+
 Creating a hidden form that exploits the API that updates the user profile. Attacker places the form in the blog's content; whenever a user clicks on the button, its email is changed. Later attacker can use the forgot password feature to change the password.
 
 Attacker can inspect the update-profile page to learn the working of the API call; then create a fake HTML form with attackers details.
