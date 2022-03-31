@@ -28,7 +28,7 @@ if __name__ == "__main__":
             line = file.readline().strip()
             if not line: break
             # print(line)
-            resp = get_response_code("http://127.0.0.1:5000", line)
+            resp = get_response_code("http://127.0.0.1:5000", line[1:])
             # print(resp)
             if(resp != 404):
                 print(line, resp)

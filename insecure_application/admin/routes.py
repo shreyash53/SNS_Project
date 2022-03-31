@@ -9,4 +9,4 @@ blueprint = Blueprint('admin', __name__, url_prefix='/admin')
 def get_admin_dashboard():
     if check_session_exists():
         return render_template('admin-dashboard.html', user_ = session['name'].get())
-    return redirect('login.html')
+    return redirect('/login')

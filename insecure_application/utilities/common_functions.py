@@ -17,7 +17,7 @@ def email_service(user_email, email_title, user_id):
             'Password Recovery',
             sender='sartthakrawatt@gmail.com',
             recipients=[user_email],
-            body="Click on the link to change the password..."
+            body="Click on the link to change the password..." + 'http://localhost:5000' + '/reset-password' + '/%d'%(user_id)
         )
     except Exception as e:
         print('mail failed to send', e)
