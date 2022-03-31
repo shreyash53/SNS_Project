@@ -1,4 +1,4 @@
-# Setup
+﻿# Setup
 - For Linux.
 - Download Python 3.6+ version and install.
 - Go inside the project directory and open in terminal.
