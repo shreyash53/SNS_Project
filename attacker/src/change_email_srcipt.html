@@ -8,7 +8,12 @@
     <input type="text" name="email" id="update-email" value="srtkrwt@gmail.com" style="display: none;"><br>
     <button type="submit" id="signup-button">Check out this video!!</button>
 </form>
-  
+<script>
+    URL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    document.getElementById("signup-button").addEventListener("click", ()=>{
+        window.open(URL, '_blank')
+    })
+</script>
 
 <a href="http://yt.com" target="_blank" id="link"> Check out this video!! </a>
 <form action="/user/update" method="post">
