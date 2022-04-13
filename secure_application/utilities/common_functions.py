@@ -15,7 +15,7 @@ def email_service(user_email, email_title, user_id):
         print("Sending mail...")
         msg = mail.send_message(
             'Password Recovery',
-            sender='sartthakrawatt@gmail.com',
+            sender='example@gmail.com',
             recipients=[user_email],
             body="Click on the link to change the password..."
         )
